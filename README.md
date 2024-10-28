@@ -1,5 +1,7 @@
 # SQL
-В данном репозитории я буду писать SQL-запросы
+В данном репозитории я буду писать SQL-запросы.
+Я имею опыт в написании SQL-запросов на уровне join.
+Это несколько примеров написании запросов, которые я писала на курсах. 
 
 # Задание 1:
 Выгрузить из таблицы buyer поля bracelet_id, last_name и percent_of_discount. Назначить полям псевдонимы id, name_client и discount.
@@ -66,3 +68,29 @@ WHERE connection_area NOT IN ('Роботические гонки','Робо-г
 AND age IN (30,31,32,33,34,35,36,37,38,39,40,41,41,42,43,44,45,46,47,48)
 
 AND percent_of_discount = 0;
+
+# Задание 6:
+Посчитайте, сколько в среднем клиент с браслетом (поле bracelet_id) 145863 потратил на хот-доги с добавлением кетчупа и майонеза одновременно или на хот-доги с мясной сосиской. Если кетчуп и майонез добавлены, поля mayonnaise и ketchup содержат значение 1.
+
+SELECT AVG(price*quantity)
+
+FROM hotdog
+
+WHERE bracelet_id=145863 
+
+AND (mayonnaise=1 AND ketchup=1 OR vegan_sausage = 0);
+
+# Задание 7:
+Отберите три зоны первого подключения (поле connection_area) из таблицы buyer, где средняя скидка (поле percent_of_discount) была выше всего.
+
+SELECT connection_area,
+
+AVG(percent_of_discount)
+
+FROM buyer
+
+GROUP BY connection_area
+
+ORDER BY AVG(percent_of_discount) DESC
+
+LIMIT 3;
